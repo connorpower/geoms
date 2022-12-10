@@ -70,5 +70,7 @@ assert_eq!(rect.right, 110.0);
 [docs-main-url]: http://connorpower.com/geoms/
 [docs-url]: https://docs.rs/geoms
 [docs-badge]: https://docs.rs/geoms/badge.svg
+[mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [mit-url]: http://connorpower.com/geoms/main/LICENSE
-[actions-url]: https://github.com/connorpower/geoms/actions/workflows/CI.yml/badge.svg
+[actions-url]: https://github.com/connorpower/geoms/actions?query=workflow%3ACI
+[actions-badge]: https://github.com/connorpower/geoms/workflows/CI/badge.svg
