@@ -18,6 +18,13 @@ pub use d2d::*;
 pub use win32::*;
 
 /// 2D point representation, compatible with any numeric representation.
+///
+/// # Conversions
+///
+/// If _feature_ `"d2d"` is enabled, then a [`Point2D<f32>`] can be
+/// directly converted into a Direct2D [`D2D_POINT_2F`] struct.
+///
+/// [`D2D_POINT_2F`]: windows::Win32::Graphics::Direct2D::Common::D2D_POINT_2F
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct Point2D<T>
@@ -52,7 +59,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::Point2D;
+    /// use ::geoms::d2::Point2D;
     ///
     /// let origin = Point2D::<f32>::zero();
     ///
@@ -71,7 +78,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::Point2D;
+    /// use ::geoms::d2::Point2D;
     ///
     /// let float_point = Point2D::<f32> { x: 3.3, y: 4.4 };
     ///
@@ -98,7 +105,9 @@ where
 /// # Conversions
 ///
 /// If _feature_ `"d2d"` is enabled, then a [`Size2D<u32>`] can be directly
-/// converted into a Direct2D `D2D_SIZE_U` struct.
+/// converted into a Direct2D [`D2D_SIZE_U`] struct.
+///
+/// [`D2D_SIZE_U`]: windows::Win32::Graphics::Direct2D::Common::D2D_SIZE_U
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct Size2D<T>
@@ -133,7 +142,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::Size2D;
+    /// use ::geoms::d2::Size2D;
     ///
     /// let zero = Size2D::<f32>::zero();
     ///
@@ -150,7 +159,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::Size2D;
+    /// use ::geoms::d2::Size2D;
     ///
     /// let pixel = Size2D::<f32>::pixel();
     ///
@@ -177,7 +186,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{Rect2D, Size2D, Point2D};
+    /// use ::geoms::d2::{Rect2D, Size2D, Point2D};
     ///
     /// let size = Size2D { width: 10.3_f32, height: 10.8 };
     ///
@@ -204,10 +213,13 @@ where
 /// # Conversions
 ///
 /// If _feature_ `"d2d"` is enabled, then a [`Rect2D<f32>`] can be directly
-/// converted into a Direct2D `D2D_RECT_F` struct.
+/// converted into a Direct2D [`D2D_RECT_F`] struct.
 ///
-/// If _feature_ `"win32"` is enabled, then a [`Rect2D<u32>`] can be directly
-/// converted into a Win32 `RECT` struct.
+/// If _feature_ `"win32"` is enabled, then a [`Rect2D<i32>`] can be directly
+/// converted into a Win32 [`RECT`] struct.
+///
+/// [`D2D_RECT_F`]: windows::Win32::Graphics::Direct2D::Common::D2D_RECT_F
+/// [`RECT`]: windows::Win32::Foundation::RECT
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct Rect2D<T>
@@ -248,7 +260,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::Rect2D;
+    /// use ::geoms::d2::Rect2D;
     ///
     /// let empty = Rect2D::<f32>::zero();
     ///
@@ -272,9 +284,9 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{Rect2D, Size2D, Point2D};
+    /// use ::geoms::d2::{Rect2D, Size2D, Point2D};
     ///
-    /// let rect = Rect2D::<f32>::from_size_and_origin(
+    /// let rect = Rect2D::<f32>::with_size_and_origin(
     ///     Size2D {
     ///         width: 10.0,
     ///         height: 10.0
@@ -290,7 +302,7 @@ where
     /// assert_eq!(rect.top, 5.0);
     /// assert_eq!(rect.bottom, 15.0);
     /// ```
-    pub fn from_size_and_origin(size: Size2D<T>, origin: Point2D<T>) -> Self
+    pub fn with_size_and_origin(size: Size2D<T>, origin: Point2D<T>) -> Self
     where
         T: Add<Output = T>,
     {
@@ -320,9 +332,9 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{Rect2D, Size2D, Point2D};
+    /// use ::geoms::d2::{Rect2D, Size2D, Point2D};
     ///
-    /// let float_rect = Rect2D::<f32>::from_size_and_origin(
+    /// let float_rect = Rect2D::<f32>::with_size_and_origin(
     ///     Size2D {
     ///         width: 10.0,
     ///         height: 10.0
@@ -351,8 +363,9 @@ where
 }
 
 /// 2D dimensional rounded rectangle, compatible with any numeric
-/// representation. Contains the dimensions and corner radii of a rounded
-/// rectangle.
+/// representation.
+///
+/// Contains the dimensions and corner radii of a rounded rectangle.
 ///
 /// Each corner of the rectangle specified by rect is replaced with a quarter
 /// ellipse, with a radius in each direction specified by radiusX and radiusY.
@@ -370,10 +383,11 @@ where
 /// # Conversions
 ///
 /// If _feature_ `"d2d"` is enabled, then a [`RoundedRect2D<f32>`] can be
-/// directly converted into a Direct2D `D2D1_ROUNDED_RECT ` struct.
+/// directly converted into a Direct2D [`D2D1_ROUNDED_RECT`] struct.
 ///
 /// [`radius_x`]: self.radius_x
 /// [`radius_y`]: self.radius_y
+/// [`D2D1_ROUNDED_RECT`]: windows::Win32::Graphics::Direct2D::D2D1_ROUNDED_RECT
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct RoundedRect2D<T>
@@ -413,7 +427,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::RoundedRect2D;
+    /// use ::geoms::d2::RoundedRect2D;
     ///
     /// let empty = RoundedRect2D::<f32>::zero();
     ///
@@ -439,9 +453,9 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{Rect2D, Size2D, Point2D};
+    /// use ::geoms::d2::{Rect2D, Size2D, Point2D};
     ///
-    /// let rect = Rect2D::<f32>::from_size_and_origin(
+    /// let rect = Rect2D::<f32>::with_size_and_origin(
     ///     Size2D {
     ///         width: 10.0,
     ///         height: 10.0
@@ -457,12 +471,12 @@ where
     /// assert_eq!(rect.top, 5.0);
     /// assert_eq!(rect.bottom, 15.0);
     /// ```
-    pub fn from_size_and_origin(size: Size2D<T>, origin: Point2D<T>, corner_radius: T) -> Self
+    pub fn with_size_and_origin(size: Size2D<T>, origin: Point2D<T>, corner_radius: T) -> Self
     where
         T: Add<Output = T>,
     {
         Self {
-            rect: Rect2D::from_size_and_origin(size, origin),
+            rect: Rect2D::with_size_and_origin(size, origin),
             radius_x: corner_radius,
             radius_y: corner_radius,
         }
@@ -486,9 +500,9 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{RoundedRect2D, Size2D, Point2D};
+    /// use ::geoms::d2::{RoundedRect2D, Size2D, Point2D};
     ///
-    /// let float_rect = RoundedRect2D::<f32>::from_size_and_origin(
+    /// let float_rect = RoundedRect2D::<f32>::with_size_and_origin(
     ///     Size2D {
     ///         width: 10.0,
     ///         height: 10.0
@@ -515,13 +529,16 @@ where
     }
 }
 
-/// 2D dimensional ellipse, compatible with any numeric representation. Contains
-/// the center point, x-radius, and y-radius of an ellipse.
+/// 2D dimensional ellipse, compatible with any numeric representation.
+///
+/// Contains the center point, x-radius, and y-radius of an ellipse.
 ///
 /// # Conversions
 ///
 /// If _feature_ `"d2d"` is enabled, then a [`Ellipse2D<f32>`] can be
-/// directly converted into a Direct2D `D2D1_ELLIPSE` struct.
+/// directly converted into a Direct2D [`D2D1_ELLIPSE`] struct.
+///
+/// [`D2D1_ELLIPSE`]: windows::Win32::Graphics::Direct2D::D2D1_ELLIPSE
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct Ellipse2D<T>
@@ -559,7 +576,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::Ellipse2D;
+    /// use ::geoms::d2::Ellipse2D;
     ///
     /// let empty = Ellipse2D::<f32>::zero();
     ///
@@ -580,7 +597,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{Ellipse2D, Point2D};
+    /// use ::geoms::d2::{Ellipse2D, Point2D};
     ///
     /// let circle = Ellipse2D::<f32>::new_circle(
     ///     Point2D {
@@ -611,7 +628,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{Ellipse2D, Point2D};
+    /// use ::geoms::d2::{Ellipse2D, Point2D};
     ///
     /// let circle = Ellipse2D::<f32>::new_circle(
     ///     Point2D {
@@ -654,6 +671,15 @@ mod win32 {
             unsafe { ::std::mem::transmute(val) }
         }
     }
+
+    impl From<RECT> for Rect2D<i32> {
+        fn from(val: RECT) -> Self {
+            // SAFETY: our `Rect2D` is modelled on the same memory layout as the
+            // windows `RECT` and we restrict this conversion implementation to
+            // rectangles with `i32` representations.
+            unsafe { ::std::mem::transmute(val) }
+        }
+    }
 }
 
 #[cfg(feature = "d2d")]
@@ -673,6 +699,15 @@ mod d2d {
         }
     }
 
+    impl From<D2D_POINT_2F> for Point2D<f32> {
+        fn from(val: D2D_POINT_2F) -> Self {
+            // SAFETY: our `Point2D` is modelled on the same memory layout as
+            // the Direct2D `D2D_POINT_2F` and we restrict this conversion
+            // implementation to sizes with `f32` representations.
+            unsafe { ::std::mem::transmute(val) }
+        }
+    }
+
     impl From<Size2D<u32>> for D2D_SIZE_U {
         fn from(val: Size2D<u32>) -> Self {
             // SAFETY: our `Size2D` is modelled on the same memory layout as the
@@ -682,8 +717,26 @@ mod d2d {
         }
     }
 
+    impl From<D2D_SIZE_U> for Size2D<u32> {
+        fn from(val: D2D_SIZE_U) -> Self {
+            // SAFETY: our `Size2D` is modelled on the same memory layout as the
+            // Direct2D `D2D_SIZE_U` and we restrict this conversion
+            // implementation to sizes with `u32` representations.
+            unsafe { ::std::mem::transmute(val) }
+        }
+    }
+
     impl From<Rect2D<f32>> for D2D_RECT_F {
         fn from(val: Rect2D<f32>) -> Self {
+            // SAFETY: our `Rect2D` is modelled on the same memory layout as the
+            // Direct2D `D2D_RECT_F` and we restrict this conversion
+            // implementation to rectangles with `f32` representations.
+            unsafe { ::std::mem::transmute(val) }
+        }
+    }
+
+    impl From<D2D_RECT_F> for Rect2D<f32> {
+        fn from(val: D2D_RECT_F) -> Self {
             // SAFETY: our `Rect2D` is modelled on the same memory layout as the
             // Direct2D `D2D_RECT_F` and we restrict this conversion
             // implementation to rectangles with `f32` representations.
@@ -701,6 +754,16 @@ mod d2d {
         }
     }
 
+    impl From<D2D1_ROUNDED_RECT> for RoundedRect2D<f32> {
+        fn from(val: D2D1_ROUNDED_RECT) -> Self {
+            // SAFETY: our `RoundedRect2D` is modelled on the same memory layout
+            // as the Direct2D `D2D1_ROUNDED_RECT` and we restrict this
+            // conversion implementation to rectangles with `f32`
+            // representations.
+            unsafe { ::std::mem::transmute(val) }
+        }
+    }
+
     impl From<Ellipse2D<f32>> for D2D1_ELLIPSE {
         fn from(val: Ellipse2D<f32>) -> Self {
             // SAFETY: our `Ellipse2D` is modelled on the same memory layout as
@@ -708,5 +771,149 @@ mod d2d {
             // implementation to ellipses with `f32` representations.
             unsafe { ::std::mem::transmute(val) }
         }
+    }
+
+    impl From<D2D1_ELLIPSE> for Ellipse2D<f32> {
+        fn from(val: D2D1_ELLIPSE) -> Self {
+            // SAFETY: our `Ellipse2D` is modelled on the same memory layout as
+            // the Direct2D `D2D1_ELLIPSE` and we restrict this conversion
+            // implementation to ellipses with `f32` representations.
+            unsafe { ::std::mem::transmute(val) }
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use ::pretty_assertions::assert_eq;
+
+    #[cfg(feature = "win32")]
+    use ::windows::Win32::Foundation::RECT;
+
+    #[cfg(feature = "d2d")]
+    use ::windows::Win32::Graphics::Direct2D::{
+        Common::{D2D_POINT_2F, D2D_RECT_F, D2D_SIZE_U},
+        D2D1_ELLIPSE, D2D1_ROUNDED_RECT,
+    };
+
+    #[test]
+    #[cfg(feature = "d2d")]
+    fn test_round_trip_point_f() {
+        let point = Point2D::<f32> {
+            x: 123.456,
+            y: 20_000.0,
+        };
+
+        let d2d_point: D2D_POINT_2F = point.into();
+        let point_round_trip: Point2D<f32> = d2d_point.into();
+
+        assert_eq!(point, point_round_trip);
+        assert_eq!(d2d_point.x, 123.456);
+        assert_eq!(d2d_point.y, 20_000.0);
+    }
+
+    #[test]
+    #[cfg(feature = "d2d")]
+    fn test_round_trip_size_u() {
+        let size = Size2D::<u32> {
+            width: 123,
+            height: 20_000,
+        };
+
+        let d2d_size: D2D_SIZE_U = size.into();
+        let size_round_trip: Size2D<u32> = d2d_size.into();
+
+        assert_eq!(size, size_round_trip);
+        assert_eq!(d2d_size.width, 123);
+        assert_eq!(d2d_size.height, 20_000);
+    }
+
+    #[test]
+    #[cfg(feature = "d2d")]
+    fn test_round_trip_d2d_rect_f() {
+        let rect = Rect2D::<f32> {
+            left: 123.456,
+            right: 20_000.0,
+            top: 0.0,
+            bottom: 0.5,
+        };
+
+        let d2d_rect: D2D_RECT_F = rect.into();
+        let rect_round_trip: Rect2D<f32> = d2d_rect.into();
+
+        assert_eq!(rect, rect_round_trip);
+        assert_eq!(d2d_rect.left, 123.456);
+        assert_eq!(d2d_rect.right, 20_000.0);
+        assert_eq!(d2d_rect.top, 0.0);
+        assert_eq!(d2d_rect.bottom, 0.5);
+    }
+
+    #[test]
+    #[cfg(feature = "d2d")]
+    fn test_round_trip_rounded_rect_f() {
+        let rect = RoundedRect2D::<f32> {
+            rect: Rect2D {
+                left: 123.456,
+                right: 20_000.0,
+                top: 0.0,
+                bottom: 0.5,
+            },
+            radius_x: 1.1,
+            radius_y: 2.2,
+        };
+
+        let d2d_rect: D2D1_ROUNDED_RECT = rect.into();
+        let rect_round_trip: RoundedRect2D<f32> = d2d_rect.into();
+
+        assert_eq!(rect, rect_round_trip);
+        assert_eq!(d2d_rect.rect.left, 123.456);
+        assert_eq!(d2d_rect.rect.right, 20_000.0);
+        assert_eq!(d2d_rect.rect.top, 0.0);
+        assert_eq!(d2d_rect.rect.bottom, 0.5);
+        assert_eq!(d2d_rect.radiusX, 1.1);
+        assert_eq!(d2d_rect.radiusY, 2.2);
+    }
+
+    #[test]
+    #[cfg(feature = "d2d")]
+    fn test_round_trip_d2d_ellipse_f() {
+        let ellipse = Ellipse2D::<f32> {
+            center: Point2D {
+                x: 123.456,
+                y: 20_000.0,
+            },
+            radius_x: 1.1,
+            radius_y: 2.2,
+        };
+
+        let d2d_ellipse: D2D1_ELLIPSE = ellipse.into();
+        let ellipse_round_trip: Ellipse2D<f32> = d2d_ellipse.into();
+
+        assert_eq!(ellipse, ellipse_round_trip);
+        assert_eq!(d2d_ellipse.point.x, 123.456);
+        assert_eq!(d2d_ellipse.point.y, 20_000.0);
+        assert_eq!(d2d_ellipse.radiusX, 1.1);
+        assert_eq!(d2d_ellipse.radiusY, 2.2);
+    }
+
+    #[test]
+    #[cfg(feature = "win32")]
+    fn test_round_trip_win32_rect() {
+        let rect = Rect2D::<i32> {
+            left: -123,
+            right: 20_000,
+            top: 0,
+            bottom: 456,
+        };
+
+        let win32_rect: RECT = rect.into();
+        let rect_round_trip: Rect2D<i32> = win32_rect.into();
+
+        assert_eq!(rect, rect_round_trip);
+        assert_eq!(win32_rect.left, -123);
+        assert_eq!(win32_rect.right, 20_000);
+        assert_eq!(win32_rect.top, 0);
+        assert_eq!(win32_rect.bottom, 456);
     }
 }

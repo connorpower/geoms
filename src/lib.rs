@@ -1,6 +1,4 @@
-//! [`::d2d`](crate) is a Direct2D-based graphics package which provides only
-//! the most minimal of conveniences over the underlying DirectX implementation.
-
+#![doc = include_str!("../README.md")]
 #![deny(rust_2018_idioms)]
 #![warn(missing_docs)]
 #![warn(rustdoc::missing_crate_level_docs)]
@@ -14,15 +12,7 @@
         rustdoc::missing_crate_level_docs,
     )
 )]
+#![cfg_attr(nightly, feature(doc_cfg))]
+#![cfg_attr(nightly, doc(cfg_hide(doc)))]
 
-mod color;
-mod context;
-mod factory;
-mod resources;
-mod target;
-
-pub use color::*;
-pub use context::*;
-pub use factory::*;
-pub use resources::*;
-pub use target::*;
+pub mod d2;

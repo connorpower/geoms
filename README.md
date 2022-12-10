@@ -1,53 +1,97 @@
-# directx
+# `::geoms`
 
-![CI Status](https://github.com/connorpower/directx/actions/workflows/CI.yml/badge.svg)
-![Rustdocs](https://github.com/connorpower/directx/actions/workflows/rustdocs.yml/badge.svg)
+[![Documentation][docs-badge]][docs-url]
+[![MIT licensed][mit-badge]][mit-url]
+[![Build Status][actions-badge]][actions-url]
 
-A small DirectX project in Rust. The project consists of a `::win32` library to
-abstract FFI, together with a `::game` binary which serves as a simple test-bed.
+[Documentation (`main` branch)][docs-main-url]
 
-[Documentation](http://connorpower.com/directx/)
+Geometry for Microsoft platforms - a set of geometry primitives with memory
+layouts optimized for native APIs ([Win32][], [Direct2D][], and [Direct3D][]).
 
-## Requirements
+The goal of this crate is to provide an idiomatic but zero-cost interface to
+common geometric types used in Microsoft graphics APIs. Integration with the
+excellent [`::num_traits`][] crate allows for geometric types to be represented
+by
+ arbitrary numeric types, and allows conversion between different numeric
+representations of entire higher-level types.
 
-- Windows 11+ or newer
-- DirectX 10 capable graphics card
+## Features
+
+If _feature_ `"d2d"` is enabled, then some primitives can be directly
+converted into a [Direct2D][] structures.
+
+If _feature_ `"win32"` is enabled, then some primitives can be directly
+converted into a [Win32][] structures.
 
 ## Usage
 
-To build and run the example, a simple cargo run suffices:
+To use `geoms`, add the following to your `Cargo.toml`:
 
-```powershell
-cargo run
+```toml
+[dependencies]
+geoms = "0.0.1"
 ```
 
-## Tracing Support
+To enable optional conversions to native Microsoft types, activate the
+appropriate features. E.g. for [Direct2D][] support:
 
-Both the `::win32` library and the example binary are instrumented with tokio's
-excellent [`::tracing`](https://github.com/tokio-rs/tracing) library.
-
-To enable tracing, the project must be built with the `stdio` feature. The
-`stdio` feature flag changes the project from a Windows subsystem to a Console
-subsystem and ensure that stdin/stdout/stderr are attached to the process.
-
-Set the appropriate tracing level environment variable and execute the program
-from the command line to view trace output:
-
-```powershell
-$env:RUST_LOG = "trace"
-cargo run --features stdio
+```toml
+[dependencies]
+geoms = { version = "0.0.1", features = ["d2d"] }
 ```
 
-#### Example
+### Example
 
-![tracing example](./docs/images/tracing.png)
+```rust
+use ::geoms::d2::{Rect2D, Point2D, Size2D};
+use ::windows::Win32::Graphics::Direct2D::Common::D2D_RECT_F;
+
+// Construct our Rust rectangle, 100x20 pixels at point 10,10
+let rect = Rect2D::with_size_and_origin(
+    Size2D { width: 100.0, height: 20.0 },
+    Point2D { x: 10.0, y: 10.0 },
+);
+
+// Convert our Rust rectangle into a Direct2D rectangle. This merely
+// transmutes under the hood as the memory layouts are the same.
+let d2d_rect: D2D_RECT_F = rect.into();
+
+// Confirm our Direct2D rectangle has the expected properties.
+assert_eq!(rect.left, 10.0);
+assert_eq!(rect.right, 110.0);
+
+// Cast our entire rect to a u32 representation of the same primitive:
+let u_rect = rect.cast::<u32>();
+assert_eq!(u_rect.left, 10);
+assert_eq!(u_rect.right, 110);
+
+```
+
+## Current Status
+
+Only a small number of primitives have been implemented as required for personal
+projects. The API is unstable and expected to change.
 
 ## License
 
-This project is licensed under the [MIT license](LICENSE).
+This project is licensed under the [MIT license][mit-url]
 
 ### Contribution
 
 Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in this repository by you, shall be licensed as MIT, without any
 additional terms or conditions.
+
+
+[docs-main-url]: http://connorpower.com/geoms/
+[docs-url]: https://docs.rs/geoms
+[docs-badge]: https://docs.rs/geoms/badge.svg
+[mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[mit-url]: http://connorpower.com/geoms/main/LICENSE
+[actions-url]: https://github.com/connorpower/geoms/actions?query=workflow%3ACI
+[actions-badge]: https://github.com/connorpower/geoms/workflows/CI/badge.svg
+[Direct2D]: https://learn.microsoft.com/en-us/windows/win32/direct2d/direct2d-overview
+[Direct3D]: https://learn.microsoft.com/en-us/windows/win32/getting-started-with-direct3d
+[Win32]: https://learn.microsoft.com/en-us/windows/win32/
+[`::num_traits`]: https://crates.io/crates/num-traits
