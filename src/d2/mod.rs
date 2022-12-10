@@ -52,7 +52,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::Point2D;
+    /// use ::geoms::d2::Point2D;
     ///
     /// let origin = Point2D::<f32>::zero();
     ///
@@ -71,7 +71,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::Point2D;
+    /// use ::geoms::d2::Point2D;
     ///
     /// let float_point = Point2D::<f32> { x: 3.3, y: 4.4 };
     ///
@@ -133,7 +133,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::Size2D;
+    /// use ::geoms::d2::Size2D;
     ///
     /// let zero = Size2D::<f32>::zero();
     ///
@@ -150,7 +150,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::Size2D;
+    /// use ::geoms::d2::Size2D;
     ///
     /// let pixel = Size2D::<f32>::pixel();
     ///
@@ -177,7 +177,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{Rect2D, Size2D, Point2D};
+    /// use ::geoms::d2::{Rect2D, Size2D, Point2D};
     ///
     /// let size = Size2D { width: 10.3_f32, height: 10.8 };
     ///
@@ -248,7 +248,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::Rect2D;
+    /// use ::geoms::d2::Rect2D;
     ///
     /// let empty = Rect2D::<f32>::zero();
     ///
@@ -272,7 +272,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{Rect2D, Size2D, Point2D};
+    /// use ::geoms::d2::{Rect2D, Size2D, Point2D};
     ///
     /// let rect = Rect2D::<f32>::from_size_and_origin(
     ///     Size2D {
@@ -320,7 +320,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{Rect2D, Size2D, Point2D};
+    /// use ::geoms::d2::{Rect2D, Size2D, Point2D};
     ///
     /// let float_rect = Rect2D::<f32>::from_size_and_origin(
     ///     Size2D {
@@ -413,7 +413,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::RoundedRect2D;
+    /// use ::geoms::d2::RoundedRect2D;
     ///
     /// let empty = RoundedRect2D::<f32>::zero();
     ///
@@ -439,7 +439,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{Rect2D, Size2D, Point2D};
+    /// use ::geoms::d2::{Rect2D, Size2D, Point2D};
     ///
     /// let rect = Rect2D::<f32>::from_size_and_origin(
     ///     Size2D {
@@ -486,7 +486,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{RoundedRect2D, Size2D, Point2D};
+    /// use ::geoms::d2::{RoundedRect2D, Size2D, Point2D};
     ///
     /// let float_rect = RoundedRect2D::<f32>::from_size_and_origin(
     ///     Size2D {
@@ -559,7 +559,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::Ellipse2D;
+    /// use ::geoms::d2::Ellipse2D;
     ///
     /// let empty = Ellipse2D::<f32>::zero();
     ///
@@ -580,7 +580,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{Ellipse2D, Point2D};
+    /// use ::geoms::d2::{Ellipse2D, Point2D};
     ///
     /// let circle = Ellipse2D::<f32>::new_circle(
     ///     Point2D {
@@ -611,7 +611,7 @@ where
     /// # Example
     ///
     /// ```
-    /// use ::win_geom::d2::{Ellipse2D, Point2D};
+    /// use ::geoms::d2::{Ellipse2D, Point2D};
     ///
     /// let circle = Ellipse2D::<f32>::new_circle(
     ///     Point2D {
