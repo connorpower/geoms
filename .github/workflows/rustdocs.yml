@@ -31,11 +31,11 @@ jobs:
         uses: actions/configure-pages@v2
 
       - name: Build Documentation
-        run: cargo doc --lib --no-deps
+        run: cargo +nightly doc --lib --all-features
 
       - name: Create index
         run: |
-            '<meta http-equiv="refresh" content="0; url=win32">' | Out-File .\target\doc\index.html
+            '<meta http-equiv="refresh" content="0; url=geoms">' | Out-File .\target\doc\index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
