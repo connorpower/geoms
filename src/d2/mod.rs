@@ -780,3 +780,138 @@ mod d2d {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use ::pretty_assertions::assert_eq;
+
+    #[cfg(feature = "win32")]
+    use ::windows::Win32::Foundation::RECT;
+
+    #[cfg(feature = "d2d")]
+    use ::windows::Win32::Graphics::Direct2D::{
+        Common::{D2D_POINT_2F, D2D_RECT_F, D2D_SIZE_U},
+        D2D1_ELLIPSE, D2D1_ROUNDED_RECT,
+    };
+
+    #[test]
+    #[cfg(feature = "d2d")]
+    fn test_round_trip_point_f() {
+        let point = Point2D::<f32> {
+            x: 123.456,
+            y: 20_000.0,
+        };
+
+        let d2d_point: D2D_POINT_2F = point.into();
+        let point_round_trip: Point2D<f32> = d2d_point.into();
+
+        assert_eq!(point, point_round_trip);
+        assert_eq!(d2d_point.x, 123.456);
+        assert_eq!(d2d_point.y, 20_000.0);
+    }
+
+    #[test]
+    #[cfg(feature = "d2d")]
+    fn test_round_trip_size_u() {
+        let size = Size2D::<u32> {
+            width: 123,
+            height: 20_000,
+        };
+
+        let d2d_size: D2D_SIZE_U = size.into();
+        let size_round_trip: Size2D<u32> = d2d_size.into();
+
+        assert_eq!(size, size_round_trip);
+        assert_eq!(d2d_size.width, 123);
+        assert_eq!(d2d_size.height, 20_000);
+    }
+
+    #[test]
+    #[cfg(feature = "d2d")]
+    fn test_round_trip_d2d_rect_f() {
+        let rect = Rect2D::<f32> {
+            left: 123.456,
+            right: 20_000.0,
+            top: 0.0,
+            bottom: 0.5,
+        };
+
+        let d2d_rect: D2D_RECT_F = rect.into();
+        let rect_round_trip: Rect2D<f32> = d2d_rect.into();
+
+        assert_eq!(rect, rect_round_trip);
+        assert_eq!(d2d_rect.left, 123.456);
+        assert_eq!(d2d_rect.right, 20_000.0);
+        assert_eq!(d2d_rect.top, 0.0);
+        assert_eq!(d2d_rect.bottom, 0.5);
+    }
+
+    #[test]
+    #[cfg(feature = "d2d")]
+    fn test_round_trip_rounded_rect_f() {
+        let rect = RoundedRect2D::<f32> {
+            rect: Rect2D {
+                left: 123.456,
+                right: 20_000.0,
+                top: 0.0,
+                bottom: 0.5,
+            },
+            radius_x: 1.1,
+            radius_y: 2.2,
+        };
+
+        let d2d_rect: D2D1_ROUNDED_RECT = rect.into();
+        let rect_round_trip: RoundedRect2D<f32> = d2d_rect.into();
+
+        assert_eq!(rect, rect_round_trip);
+        assert_eq!(d2d_rect.rect.left, 123.456);
+        assert_eq!(d2d_rect.rect.right, 20_000.0);
+        assert_eq!(d2d_rect.rect.top, 0.0);
+        assert_eq!(d2d_rect.rect.bottom, 0.5);
+        assert_eq!(d2d_rect.radiusX, 1.1);
+        assert_eq!(d2d_rect.radiusY, 2.2);
+    }
+
+    #[test]
+    #[cfg(feature = "d2d")]
+    fn test_round_trip_d2d_ellipse_f() {
+        let ellipse = Ellipse2D::<f32> {
+            center: Point2D {
+                x: 123.456,
+                y: 20_000.0,
+            },
+            radius_x: 1.1,
+            radius_y: 2.2,
+        };
+
+        let d2d_ellipse: D2D1_ELLIPSE = ellipse.into();
+        let ellipse_round_trip: Ellipse2D<f32> = d2d_ellipse.into();
+
+        assert_eq!(ellipse, ellipse_round_trip);
+        assert_eq!(d2d_ellipse.point.x, 123.456);
+        assert_eq!(d2d_ellipse.point.y, 20_000.0);
+        assert_eq!(d2d_ellipse.radiusX, 1.1);
+        assert_eq!(d2d_ellipse.radiusY, 2.2);
+    }
+
+    #[test]
+    #[cfg(feature = "win32")]
+    fn test_round_trip_win32_rect() {
+        let rect = Rect2D::<i32> {
+            left: -123,
+            right: 20_000,
+            top: 0,
+            bottom: 456,
+        };
+
+        let win32_rect: RECT = rect.into();
+        let rect_round_trip: Rect2D<i32> = win32_rect.into();
+
+        assert_eq!(rect, rect_round_trip);
+        assert_eq!(win32_rect.left, -123);
+        assert_eq!(win32_rect.right, 20_000);
+        assert_eq!(win32_rect.top, 0);
+        assert_eq!(win32_rect.bottom, 456);
+    }
+}
