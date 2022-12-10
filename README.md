@@ -6,27 +6,23 @@
 
 [Documentation (`main` branch)][docs-main-url]
 
-## Overview
-
 Geometry for Microsoft platforms - a set of geometry primitives with memory
-layouts optimized for native APIs (Win32, Direct2D, and Direct3D).
+layouts optimized for native APIs ([Win32][], [Direct2D][], and [Direct3D][]).
 
 The goal of this crate is to provide an idiomatic but zero-cost interface to
-common geometric types used in Microsoft graphics APIs such as Direct2D,
-Direct3D and native Win32.
-
-## Current Status
-
-Only a small number of primitives have been implemented as required for personal
-projects. The API is unstable and expected to change.
+common geometric types used in Microsoft graphics APIs. Integration with the
+excellent [`::num_traits`][] crate allows for geometric types to be represented
+by
+ arbitrary numeric types, and allows conversion between different numeric
+representations of entire higher-level types.
 
 ## Features
 
 If _feature_ `"d2d"` is enabled, then some primitives can be directly
-converted into a Direct2D structures.
+converted into a [Direct2D][] structures.
 
 If _feature_ `"win32"` is enabled, then some primitives can be directly
-converted into a Win32 structures.
+converted into a [Win32][] structures.
 
 ## Usage
 
@@ -38,7 +34,7 @@ geoms = "0.0.1"
 ```
 
 To enable optional conversions to native Microsoft types, activate the
-appropriate features. E.g. for Direct2D support:
+appropriate features. E.g. for [Direct2D][] support:
 
 ```toml
 [dependencies]
@@ -64,7 +60,28 @@ let d2d_rect: D2D_RECT_F = rect.into();
 // Confirm our Direct2D rectangle has the expected properties.
 assert_eq!(rect.left, 10.0);
 assert_eq!(rect.right, 110.0);
+
+// Cast our entire rect to a u32 representation of the same primitive:
+let u_rect = rect::cast::<u32>();
+assert_eq!(u_rect.left, 10);
+assert_eq!(u_rect.right, 110);
+
 ```
+
+## Current Status
+
+Only a small number of primitives have been implemented as required for personal
+projects. The API is unstable and expected to change.
+
+## License
+
+This project is licensed under the [MIT license][mit-url]
+
+### Contribution
+
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in this repository by you, shall be licensed as MIT, without any
+additional terms or conditions.
 
 
 [docs-main-url]: http://connorpower.com/geoms/
@@ -74,3 +91,7 @@ assert_eq!(rect.right, 110.0);
 [mit-url]: http://connorpower.com/geoms/main/LICENSE
 [actions-url]: https://github.com/connorpower/geoms/actions?query=workflow%3ACI
 [actions-badge]: https://github.com/connorpower/geoms/workflows/CI/badge.svg
+[Direct2D]: https://learn.microsoft.com/en-us/windows/win32/direct2d/direct2d-overview
+[Direct3D]: https://learn.microsoft.com/en-us/windows/win32/getting-started-with-direct3d
+[Win32]: https://learn.microsoft.com/en-us/windows/win32/
+[`::num_traits`]: https://crates.io/crates/num-traits
