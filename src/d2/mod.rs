@@ -1,13 +1,16 @@
-//! 2-Dimensional types optimized for Win32 and Direct2D APIs with some rusty
-//! conveniences.
+//! 2-Dimensional types optimized for [Win32] and [Direct2D] APIs with some
+//! rusty conveniences.
 //!
 //! # Conversions
 //!
 //! If _feature_ `"d2d"` is enabled, then some primitives can be directly
-//! converted into a Direct2D structures.
+//! converted into [Direct2D] structures.
 //!
 //! If _feature_ `"win32"` is enabled, then some primitives can be directly
-//! converted into a Win32 structures.
+//! converted into [Win32] structures.
+//!
+//! [Direct2D]: https://learn.microsoft.com/en-us/windows/win32/direct2d/direct2d-overview
+//! [Win32]: https://learn.microsoft.com/en-us/windows/win32/
 
 use ::num_traits::{AsPrimitive, Num};
 use ::std::{fmt::Debug, ops::Add};
@@ -22,9 +25,10 @@ pub use win32::*;
 /// # Conversions
 ///
 /// If _feature_ `"d2d"` is enabled, then a [`Point2D<f32>`] can be
-/// directly converted into a Direct2D [`D2D_POINT_2F`] struct.
+/// directly converted into a [Direct2D] [`D2D_POINT_2F`] struct.
 ///
 /// [`D2D_POINT_2F`]: windows::Win32::Graphics::Direct2D::Common::D2D_POINT_2F
+/// [Direct2D]: https://learn.microsoft.com/en-us/windows/win32/direct2d/direct2d-overview
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct Point2D<T>
@@ -105,9 +109,10 @@ where
 /// # Conversions
 ///
 /// If _feature_ `"d2d"` is enabled, then a [`Size2D<u32>`] can be directly
-/// converted into a Direct2D [`D2D_SIZE_U`] struct.
+/// converted into a [Direct2D] [`D2D_SIZE_U`] struct.
 ///
 /// [`D2D_SIZE_U`]: windows::Win32::Graphics::Direct2D::Common::D2D_SIZE_U
+/// [Direct2D]: https://learn.microsoft.com/en-us/windows/win32/direct2d/direct2d-overview
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct Size2D<T>
@@ -213,13 +218,15 @@ where
 /// # Conversions
 ///
 /// If _feature_ `"d2d"` is enabled, then a [`Rect2D<f32>`] can be directly
-/// converted into a Direct2D [`D2D_RECT_F`] struct.
+/// converted into a [Direct2D] [`D2D_RECT_F`] struct.
 ///
 /// If _feature_ `"win32"` is enabled, then a [`Rect2D<i32>`] can be directly
-/// converted into a Win32 [`RECT`] struct.
+/// converted into a [Win32] [`RECT`] struct.
 ///
 /// [`D2D_RECT_F`]: windows::Win32::Graphics::Direct2D::Common::D2D_RECT_F
 /// [`RECT`]: windows::Win32::Foundation::RECT
+/// [Direct2D]: https://learn.microsoft.com/en-us/windows/win32/direct2d/direct2d-overview
+/// [Win32]: https://learn.microsoft.com/en-us/windows/win32/
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct Rect2D<T>
@@ -383,11 +390,12 @@ where
 /// # Conversions
 ///
 /// If _feature_ `"d2d"` is enabled, then a [`RoundedRect2D<f32>`] can be
-/// directly converted into a Direct2D [`D2D1_ROUNDED_RECT`] struct.
+/// directly converted into a [Direct2D] [`D2D1_ROUNDED_RECT`] struct.
 ///
 /// [`radius_x`]: self.radius_x
 /// [`radius_y`]: self.radius_y
 /// [`D2D1_ROUNDED_RECT`]: windows::Win32::Graphics::Direct2D::D2D1_ROUNDED_RECT
+/// [Direct2D]: https://learn.microsoft.com/en-us/windows/win32/direct2d/direct2d-overview
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct RoundedRect2D<T>
@@ -536,9 +544,10 @@ where
 /// # Conversions
 ///
 /// If _feature_ `"d2d"` is enabled, then a [`Ellipse2D<f32>`] can be
-/// directly converted into a Direct2D [`D2D1_ELLIPSE`] struct.
+/// directly converted into a [Direct2D] [`D2D1_ELLIPSE`] struct.
 ///
 /// [`D2D1_ELLIPSE`]: windows::Win32::Graphics::Direct2D::D2D1_ELLIPSE
+/// [Direct2D]: https://learn.microsoft.com/en-us/windows/win32/direct2d/direct2d-overview
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct Ellipse2D<T>
