@@ -1,10 +1,8 @@
-# `::geoms`
+# geoms
 
 [![Documentation][docs-badge]][docs-url]
 [![MIT licensed][mit-badge]][mit-url]
 [![Build Status][actions-badge]][actions-url]
-
-[Documentation (`main` branch)][docs-main-url]
 
 Geometry for Microsoft platforms - a set of geometry primitives with memory
 layouts optimized for native APIs ([Win32][], [Direct2D][], and [Direct3D][]).
@@ -16,12 +14,13 @@ by
  arbitrary numeric types, and allows conversion between different numeric
 representations of entire higher-level types.
 
-## Features
+[→ Documentation][docs-main-url]
 
-If _feature_ `"d2d"` is enabled, then some primitives can be directly
+## Optional Features
+
+- If _feature_ `"d2d"` is enabled, then some primitives can be directly
 converted into a [Direct2D][] structures.
-
-If _feature_ `"win32"` is enabled, then some primitives can be directly
+- If _feature_ `"win32"` is enabled, then some primitives can be directly
 converted into a [Win32][] structures.
 
 ## Usage
