@@ -18,6 +18,13 @@ pub use d2d::*;
 pub use win32::*;
 
 /// 2D point representation, compatible with any numeric representation.
+///
+/// # Conversions
+///
+/// If _feature_ `"d2d"` is enabled, then a [`Point2D<f32>`] can be
+/// directly converted into a Direct2D [`D2D_POINT_2F`] struct.
+///
+/// [`D2D_POINT_2F`]: windows::Win32::Graphics::Direct2D::Common::D2D_POINT_2F
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct Point2D<T>
@@ -98,7 +105,9 @@ where
 /// # Conversions
 ///
 /// If _feature_ `"d2d"` is enabled, then a [`Size2D<u32>`] can be directly
-/// converted into a Direct2D `D2D_SIZE_U` struct.
+/// converted into a Direct2D [`D2D_SIZE_U`] struct.
+///
+/// [`D2D_SIZE_U`]: windows::Win32::Graphics::Direct2D::Common::D2D_SIZE_U
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct Size2D<T>
@@ -204,10 +213,13 @@ where
 /// # Conversions
 ///
 /// If _feature_ `"d2d"` is enabled, then a [`Rect2D<f32>`] can be directly
-/// converted into a Direct2D `D2D_RECT_F` struct.
+/// converted into a Direct2D [`D2D_RECT_F`] struct.
 ///
-/// If _feature_ `"win32"` is enabled, then a [`Rect2D<u32>`] can be directly
-/// converted into a Win32 `RECT` struct.
+/// If _feature_ `"win32"` is enabled, then a [`Rect2D<i32>`] can be directly
+/// converted into a Win32 [`RECT`] struct.
+///
+/// [`D2D_RECT_F`]: windows::Win32::Graphics::Direct2D::Common::D2D_RECT_F
+/// [`RECT`]: windows::Win32::Foundation::RECT
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct Rect2D<T>
@@ -370,10 +382,11 @@ where
 /// # Conversions
 ///
 /// If _feature_ `"d2d"` is enabled, then a [`RoundedRect2D<f32>`] can be
-/// directly converted into a Direct2D `D2D1_ROUNDED_RECT ` struct.
+/// directly converted into a Direct2D [`D2D1_ROUNDED_RECT`] struct.
 ///
 /// [`radius_x`]: self.radius_x
 /// [`radius_y`]: self.radius_y
+/// [`D2D1_ROUNDED_RECT`]: windows::Win32::Graphics::Direct2D::D2D1_ROUNDED_RECT
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct RoundedRect2D<T>
@@ -521,7 +534,9 @@ where
 /// # Conversions
 ///
 /// If _feature_ `"d2d"` is enabled, then a [`Ellipse2D<f32>`] can be
-/// directly converted into a Direct2D `D2D1_ELLIPSE` struct.
+/// directly converted into a Direct2D [`D2D1_ELLIPSE`] struct.
+///
+/// [`D2D1_ELLIPSE`]: windows::Win32::Graphics::Direct2D::D2D1_ELLIPSE
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 #[repr(C)]
 pub struct Ellipse2D<T>
