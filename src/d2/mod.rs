@@ -286,7 +286,7 @@ where
     /// ```
     /// use ::geoms::d2::{Rect2D, Size2D, Point2D};
     ///
-    /// let rect = Rect2D::<f32>::from_size_and_origin(
+    /// let rect = Rect2D::<f32>::with_size_and_origin(
     ///     Size2D {
     ///         width: 10.0,
     ///         height: 10.0
@@ -302,7 +302,7 @@ where
     /// assert_eq!(rect.top, 5.0);
     /// assert_eq!(rect.bottom, 15.0);
     /// ```
-    pub fn from_size_and_origin(size: Size2D<T>, origin: Point2D<T>) -> Self
+    pub fn with_size_and_origin(size: Size2D<T>, origin: Point2D<T>) -> Self
     where
         T: Add<Output = T>,
     {
@@ -334,7 +334,7 @@ where
     /// ```
     /// use ::geoms::d2::{Rect2D, Size2D, Point2D};
     ///
-    /// let float_rect = Rect2D::<f32>::from_size_and_origin(
+    /// let float_rect = Rect2D::<f32>::with_size_and_origin(
     ///     Size2D {
     ///         width: 10.0,
     ///         height: 10.0
@@ -454,7 +454,7 @@ where
     /// ```
     /// use ::geoms::d2::{Rect2D, Size2D, Point2D};
     ///
-    /// let rect = Rect2D::<f32>::from_size_and_origin(
+    /// let rect = Rect2D::<f32>::with_size_and_origin(
     ///     Size2D {
     ///         width: 10.0,
     ///         height: 10.0
@@ -470,12 +470,12 @@ where
     /// assert_eq!(rect.top, 5.0);
     /// assert_eq!(rect.bottom, 15.0);
     /// ```
-    pub fn from_size_and_origin(size: Size2D<T>, origin: Point2D<T>, corner_radius: T) -> Self
+    pub fn with_size_and_origin(size: Size2D<T>, origin: Point2D<T>, corner_radius: T) -> Self
     where
         T: Add<Output = T>,
     {
         Self {
-            rect: Rect2D::from_size_and_origin(size, origin),
+            rect: Rect2D::with_size_and_origin(size, origin),
             radius_x: corner_radius,
             radius_y: corner_radius,
         }
@@ -501,7 +501,7 @@ where
     /// ```
     /// use ::geoms::d2::{RoundedRect2D, Size2D, Point2D};
     ///
-    /// let float_rect = RoundedRect2D::<f32>::from_size_and_origin(
+    /// let float_rect = RoundedRect2D::<f32>::with_size_and_origin(
     ///     Size2D {
     ///         width: 10.0,
     ///         height: 10.0
