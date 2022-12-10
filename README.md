@@ -62,7 +62,7 @@ assert_eq!(rect.left, 10.0);
 assert_eq!(rect.right, 110.0);
 
 // Cast our entire rect to a u32 representation of the same primitive:
-let u_rect = rect::cast::<u32>();
+let u_rect = rect.cast::<u32>();
 assert_eq!(u_rect.left, 10);
 assert_eq!(u_rect.right, 110);
 
