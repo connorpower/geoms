@@ -19,9 +19,9 @@ representations of entire higher-level types.
 ## Optional Features
 
 - If _feature_ `"d2d"` is enabled, then some primitives can be directly
-converted into a [Direct2D][] structures.
+converted into [Direct2D][] structures.
 - If _feature_ `"win32"` is enabled, then some primitives can be directly
-converted into a [Win32][] structures.
+converted into [Win32][] structures.
 
 ## Usage
 
@@ -87,7 +87,7 @@ additional terms or conditions.
 [docs-url]: https://docs.rs/geoms
 [docs-badge]: https://docs.rs/geoms/badge.svg
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[mit-url]: http://connorpower.com/geoms/main/LICENSE
+[mit-url]: https://github.com/connorpower/geoms/blob/main/LICENSE
 [actions-url]: https://github.com/connorpower/geoms/actions?query=workflow%3ACI
 [actions-badge]: https://github.com/connorpower/geoms/workflows/CI/badge.svg
 [Direct2D]: https://learn.microsoft.com/en-us/windows/win32/direct2d/direct2d-overview
