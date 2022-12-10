@@ -24,6 +24,12 @@ default = []
 win32 = ["windows/Win32_Foundation"]
 # Enables conversions to and from Direct2D geometry types.
 d2d = ["windows/Win32_Graphics_Direct2D_Common"]
+# Enables nightly-specific optional features for documentation.
+nightly = []
+
+# docs.rs-specific configuration to enable nightly documentation features.
+[package.metadata.docs.rs]
+all-features = true
 
 [dependencies]
 num-traits = "0.2.15"
