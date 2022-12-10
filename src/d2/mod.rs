@@ -363,8 +363,9 @@ where
 }
 
 /// 2D dimensional rounded rectangle, compatible with any numeric
-/// representation. Contains the dimensions and corner radii of a rounded
-/// rectangle.
+/// representation.
+///
+/// Contains the dimensions and corner radii of a rounded rectangle.
 ///
 /// Each corner of the rectangle specified by rect is replaced with a quarter
 /// ellipse, with a radius in each direction specified by radiusX and radiusY.
@@ -528,8 +529,9 @@ where
     }
 }
 
-/// 2D dimensional ellipse, compatible with any numeric representation. Contains
-/// the center point, x-radius, and y-radius of an ellipse.
+/// 2D dimensional ellipse, compatible with any numeric representation.
+///
+/// Contains the center point, x-radius, and y-radius of an ellipse.
 ///
 /// # Conversions
 ///
