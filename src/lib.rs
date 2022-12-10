@@ -1,14 +1,4 @@
-//! Geometry primitives with memory layouts optimized for native Windows APIs
-//! (Win32, Direct2D, and Direct3D).
-//!
-//! # Conversions
-//!
-//! If _feature_ `"d2d"` is enabled, then some primitives can be directly
-//! converted into a Direct2D structures.
-//!
-//! If _feature_ `"win32"` is enabled, then some primitives can be directly
-//! converted into a Win32 structures.
-
+#![doc = include_str!("../README.md")]
 #![deny(rust_2018_idioms)]
 #![warn(missing_docs)]
 #![warn(rustdoc::missing_crate_level_docs)]
