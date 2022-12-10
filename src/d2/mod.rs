@@ -669,6 +669,15 @@ mod win32 {
             unsafe { ::std::mem::transmute(val) }
         }
     }
+
+    impl From<RECT> for Rect2D<i32> {
+        fn from(val: RECT) -> Self {
+            // SAFETY: our `Rect2D` is modelled on the same memory layout as the
+            // windows `RECT` and we restrict this conversion implementation to
+            // rectangles with `i32` representations.
+            unsafe { ::std::mem::transmute(val) }
+        }
+    }
 }
 
 #[cfg(feature = "d2d")]
@@ -688,6 +697,15 @@ mod d2d {
         }
     }
 
+    impl From<D2D_POINT_2F> for Point2D<f32> {
+        fn from(val: D2D_POINT_2F) -> Self {
+            // SAFETY: our `Point2D` is modelled on the same memory layout as
+            // the Direct2D `D2D_POINT_2F` and we restrict this conversion
+            // implementation to sizes with `f32` representations.
+            unsafe { ::std::mem::transmute(val) }
+        }
+    }
+
     impl From<Size2D<u32>> for D2D_SIZE_U {
         fn from(val: Size2D<u32>) -> Self {
             // SAFETY: our `Size2D` is modelled on the same memory layout as the
@@ -697,8 +715,26 @@ mod d2d {
         }
     }
 
+    impl From<D2D_SIZE_U> for Size2D<u32> {
+        fn from(val: D2D_SIZE_U) -> Self {
+            // SAFETY: our `Size2D` is modelled on the same memory layout as the
+            // Direct2D `D2D_SIZE_U` and we restrict this conversion
+            // implementation to sizes with `u32` representations.
+            unsafe { ::std::mem::transmute(val) }
+        }
+    }
+
     impl From<Rect2D<f32>> for D2D_RECT_F {
         fn from(val: Rect2D<f32>) -> Self {
+            // SAFETY: our `Rect2D` is modelled on the same memory layout as the
+            // Direct2D `D2D_RECT_F` and we restrict this conversion
+            // implementation to rectangles with `f32` representations.
+            unsafe { ::std::mem::transmute(val) }
+        }
+    }
+
+    impl From<D2D_RECT_F> for Rect2D<f32> {
+        fn from(val: D2D_RECT_F) -> Self {
             // SAFETY: our `Rect2D` is modelled on the same memory layout as the
             // Direct2D `D2D_RECT_F` and we restrict this conversion
             // implementation to rectangles with `f32` representations.
@@ -716,8 +752,27 @@ mod d2d {
         }
     }
 
+    impl From<D2D1_ROUNDED_RECT> for RoundedRect2D<f32> {
+        fn from(val: D2D1_ROUNDED_RECT) -> Self {
+            // SAFETY: our `RoundedRect2D` is modelled on the same memory layout
+            // as the Direct2D `D2D1_ROUNDED_RECT` and we restrict this
+            // conversion implementation to rectangles with `f32`
+            // representations.
+            unsafe { ::std::mem::transmute(val) }
+        }
+    }
+
     impl From<Ellipse2D<f32>> for D2D1_ELLIPSE {
         fn from(val: Ellipse2D<f32>) -> Self {
+            // SAFETY: our `Ellipse2D` is modelled on the same memory layout as
+            // the Direct2D `D2D1_ELLIPSE` and we restrict this conversion
+            // implementation to ellipses with `f32` representations.
+            unsafe { ::std::mem::transmute(val) }
+        }
+    }
+
+    impl From<D2D1_ELLIPSE> for Ellipse2D<f32> {
+        fn from(val: D2D1_ELLIPSE) -> Self {
             // SAFETY: our `Ellipse2D` is modelled on the same memory layout as
             // the Direct2D `D2D1_ELLIPSE` and we restrict this conversion
             // implementation to ellipses with `f32` representations.
